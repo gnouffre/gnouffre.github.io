@@ -306,7 +306,7 @@ dernieresave = affichageclanproperty("LASTSAVE", " ", true);
   
                     $.ajax({
                     type: 'POST',
-                            url: 'tools/extracthour.php',
+                            url: 'http://wotclanwar2.16mb.com/tools/extracthour.php',
                             success: function(result) {
                             resultatajax = result;	
 							 $('#preloadersync').hide();
@@ -2146,7 +2146,7 @@ function affichageclanproperty(entree, clanid, async)  {
 
                     $.ajax({
                     type: 'POST',
-                            url: 'tools/fonctions_showmap.php',
+                            url: 'http://wotclanwar2.16mb.com/tools/fonctions_showmap.php',
                             data: {typeselection: entree,
 							clanid : clanid
 							},
@@ -2807,7 +2807,7 @@ function buildmap(seasonid) {
   $('#building').show();
                     $.ajax({
                     type: 'POST',
-                            url: 'tools/mapbuild.php',
+                            url: 'http://wotclanwar2.16mb.com/tools/mapbuild.php',
                             data: {typeselection: seasonid
 							},
                             success: function(result) {
