@@ -373,9 +373,9 @@ function chargerlalistesave()   {
    listeinfos = JSON.parse(listeclan);
    
    if (listeinfos['season_id']) {
-   var lamapsave = 'tools/map/' +listeinfos['season_id'] + '.geojson';
+   var lamapsave = 'http://wotclanwar2.16mb.com/tools/map/' +listeinfos['season_id'] + '.geojson';
    } else {
-   var lamapsave = 'tools/map/europemap.geojson';
+   var lamapsave = 'http://wotclanwar2.16mb.com/tools/map/europemap.geojson';
    };
    layers = map.getLayers().getArray() ;
    vector = getLayerwarg(layers, "wargaming"); 
