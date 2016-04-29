@@ -306,6 +306,7 @@ dernieresave = affichageclanproperty("LASTSAVE", " ", true);
   
                     $.ajax({
                     type: 'POST',
+                    crossDomain:true,
                             url: 'http://wotclanwar2.16mb.com/tools/extracthour.php',
                             success: function(result) {
                             resultatajax = result;	
@@ -2146,6 +2147,7 @@ function affichageclanproperty(entree, clanid, async)  {
 
                     $.ajax({
                     type: 'POST',
+                    crossDomain:true,
                             url: 'http://wotclanwar2.16mb.com/tools/fonctions_showmap.php',
                             data: {typeselection: entree,
 							clanid : clanid
@@ -2807,6 +2809,7 @@ function buildmap(seasonid) {
   $('#building').show();
                     $.ajax({
                     type: 'POST',
+                    crossDomain:true,
                             url: 'http://wotclanwar2.16mb.com/tools/mapbuild.php',
                             data: {typeselection: seasonid
 							},
