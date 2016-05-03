@@ -27,6 +27,7 @@ var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv0
         // Create an execution request object.
 var data = $.getJSON(urlwebapp, function(data) {
 	datastring =  JSON.stringify(data);
+	var geojsonFormat = new ol.format.GeoJSON();
 	var features = geojsonFormat.readFeatures(datastring,
       	{featureProjection: 'EPSG:3857'});
   	masource.addFeatures(features);
