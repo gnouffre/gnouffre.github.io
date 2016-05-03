@@ -6,8 +6,8 @@
    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
   
     <script type="text/javascript">
-      function callSHOWMAP(functionname) {
-        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec"
+      function callSHOWMAP(parameter) {
+        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
 	var datastring =  JSON.stringify(data);
