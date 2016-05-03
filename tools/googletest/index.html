@@ -27,14 +27,18 @@ var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv0
         // Create an execution request object.
 var data = $.getJSON(urlwebapp, function(data) {
 	datastring =  JSON.stringify(data);
-	var vector = new ol.layer.Vector({
-		source = new ol.source.Vector({
-  		format: new ol.format.GeoJSON({
-  			source : datastring
-  		})
-		})
-});
+	var features = geojsonFormat.readFeatures(datastring,
+      	{featureProjection: 'EPSG:3857'});
+  	masource.addFeatures(features);
 
+	});
+	
+var masource = new ol.source.Vector({
+  	format: new ol.format.GeoJSON()
+	});	
+var vector = new ol.layer.Vector({
+	source = masource
+});	
 var map = new ol.Map({
   layers: [vector],
   target: 'result',
@@ -43,8 +47,6 @@ var map = new ol.Map({
     zoom: 1
   })
 });
-	});
-
 };
     </script>
 
