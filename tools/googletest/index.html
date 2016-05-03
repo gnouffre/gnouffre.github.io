@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>console pour outil WOT Clan War</title>
-   <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
   
     <script type="text/javascript">
-      function callSHOWMAP(functionname, parameters) {
+      function callSHOWMAP(functionname) {
         var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec"
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
   	var pre = document.getElementById('result');
-        var textContent = document.createTextNode(message + '\n');
+        var textContent = document.createTextNode(data + '\n');
         pre.appendChild(textContent);
 
       };
@@ -31,7 +30,7 @@
         <input type="button" value="Launch start" disabled
         onclick="google.script.run.withSuccessHandler(consoleLog).Start();" />
         <input type="button" value="Launch buildnewsave"
-        onclick="callSHOWMAP('CLANLIST', []);" />
+        onclick="callSHOWMAP('CLANLIST');" />
         </div>
 		  <div id="consoleControle" class="gwd-p-avfd">
 		  <p class="gwd-p-icmo">RESULTAT</p>
