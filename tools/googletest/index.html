@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>console pour outil WOT Clan War</title>
    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-  
+  <link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
+  <script src="http://openlayers.org/en/v3.15.1/build/ol.js"></script>
     <script type="text/javascript">
       function callSHOWMAP(parameter) {
         var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec" + parameter
@@ -18,6 +19,30 @@
 
 function videConsole() {
 	$('#result').html("Waiting order ...");
+};
+
+function showOL3(parameter) {
+var datastring ;
+var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec" + parameter
+        // Create an execution request object.
+var data = $.getJSON(urlwebapp, function(data) {
+	datastring =  JSON.stringify(data);
+	});
+var vector = new ol.layer.Vector({
+  source: new ol.source.GeoJSON({
+    projection: 'EPSG:3857',
+    text: datastring
+  })
+});
+
+var map = new ol.Map({
+  layers: [vector],
+  target: 'result',
+  view: new ol.View({
+    center: [0, 0],
+    zoom: 1
+  })
+});
 };
     </script>
 
@@ -36,6 +61,8 @@ function videConsole() {
         onclick="callSHOWMAP('?typeSelection=CLANLIST');" />
         <input type="button" value="get lastMap"
         onclick="callSHOWMAP('?typeSelection=MAP&amp;seasonid=asian_typhoon');" />
+         <input type="button" value="Show Map"
+        onclick="videConsole();showOL3('?typeSelection=MAP&amp;seasonid=asian_typhoon');" />
         <input type="button" value="Vider la console"
         onclick="videConsole();" />
         </div>
