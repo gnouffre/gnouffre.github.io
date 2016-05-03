@@ -15,6 +15,15 @@
   	
 	});
       };
+      function getMap(parameter, seasonid) {
+        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter + "?seasonid=" + seasonid;
+        // Create an execution request object.
+	$.getJSON(urlwebapp, function(data) {
+	var datastring =  JSON.stringify(data);
+	$('#result').html(datastring);
+  	
+	});
+      };
 function videConsole() {
 	$('#result').html("Waiting order ...");
 };
@@ -33,6 +42,8 @@ function videConsole() {
         onclick="callSHOWMAP('SEASONLIST');" />
         <input type="button" value="get Clan List"
         onclick="callSHOWMAP('CLANLIST');" />
+        <input type="button" value="get lastMap"
+        onclick="getMap('MAP', 'asian_typhoon');" />
         <input type="button" value="Vider la console"
         onclick="videConsole();" />
         </div>
