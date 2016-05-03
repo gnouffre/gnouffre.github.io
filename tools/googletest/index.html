@@ -10,10 +10,9 @@
         var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec"
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
-  	var pre = document.getElementById('result');
-  	var datastring =  JSON.stringify(data);
-        var textContent = document.createTextNode(datastring + '\n');
-        pre.appendChild(textContent);
+	var datastring =  JSON.stringify(data);
+	$('#result').html(datastring);
+  	
 	});
       };
 	 
