@@ -27,8 +27,7 @@ var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv0
         // Create an execution request object.
 var data = $.getJSON(urlwebapp, function(data) {
 	datastring =  JSON.stringify(data);
-	});
-var vector = new ol.layer.Vector({
+	var vector = new ol.layer.Vector({
   source: new ol.source.GeoJSON({
     projection: 'EPSG:3857',
     text: datastring
@@ -43,6 +42,8 @@ var map = new ol.Map({
     zoom: 1
   })
 });
+	});
+
 };
     </script>
 
