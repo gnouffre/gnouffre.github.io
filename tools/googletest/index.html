@@ -1,0 +1,93 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>console pour outil WOT Clan War</title>
+   <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
+   
+    <script type="text/javascript">
+      function callSHOWMAP(functionname, parameters) {
+        var scriptId = "58960103778-252fecl8rl03cjuoi6rbdrqvqd6vau9d.apps.googleusercontent.com";
+
+        // Create an execution request object.
+        var request = {        
+			"function": functionname,
+			"parameters": parameters,
+			"sessionState": 'useless',
+			"devMode": false,
+			}
+
+        // Make the API request.
+        var op = gapi.client.request({
+            'root': 'https://script.googleapis.com',
+            'path': 'v1/scripts/' + scriptId + ':run',
+            'method': 'POST',
+            'body': request
+        });
+
+        op.execute(function(resp) {
+          if (resp.error && resp.error.status) {
+            // The API encountered a problem before the script
+            // started executing.
+            appendPre('Error calling API:');
+            appendPre(JSON.stringify(resp, null, 2));
+          } else if (resp.error) {
+            // The API executed, but the script returned an error.
+            var error = resp.error.details[0];
+            appendPre('Script error message: ' + error.errorMessage);
+
+            if (error.scriptStackTraceElements) {
+              // There may not be a stacktrace if the script didn't start
+              // executing.
+              appendPre('Script error stacktrace:');
+              for (var i = 0; i < error.scriptStackTraceElements.length; i++) {
+                var trace = error.scriptStackTraceElements[i];
+                appendPre('\t' + trace.function + ':' + trace.lineNumber);
+              }
+            }
+          } else {
+            // The structure of the result will depend upon what the Apps
+            var clanlist = resp.response.result;
+            if (Object.keys(clanlist).length == 0) {
+                appendPre('No result');
+            } else {
+              appendPre('clans found');
+              Object.keys(clanlist).forEach(function(id){
+                appendPre('\t' + clanlist[id] + ' (' + id  + ')');
+              });
+            }
+          }
+        })
+      };
+	  
+      function appendPre(message) {
+        var pre = document.getElementById('result');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      };
+
+    </script>
+
+
+</head>
+
+<body class="document-body">
+        </p>
+       <div> 
+	    <p class="gwd-p-nxhm"><u>CONSOLE GOOGLE SCRIPT</u>
+        
+        <div id="consoleResult" class="gwd-p-19s1">
+        <input type="button" value="Launch start" disabled
+        onclick="google.script.run.withSuccessHandler(consoleLog).Start();" />
+        <input type="button" value="Launch buildnewsave"
+        onclick="callSHOWMAP('CLANLIST', []);" />
+        </div>
+		  <div id="consoleControle" class="gwd-p-avfd">
+		  <p class="gwd-p-icmo">RESULTAT</p>
+          <div id="result" > Waiting order ... </div>
+        </div>
+      </div> 
+</body>
+
+</html>
+
