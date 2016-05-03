@@ -11,7 +11,8 @@
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
   	var pre = document.getElementById('result');
-        var textContent = document.createTextNode(data + '\n');
+  	var datastring =  JSON.stringify(data);
+        var textContent = document.createTextNode(datastring + '\n');
         pre.appendChild(textContent);
 	});
       };
