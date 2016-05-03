@@ -16,7 +16,7 @@
 	});
       };
       function getMap(parameter, seasonid) {
-        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter + "?seasonid=" + seasonid;
+        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter + "&seasonid=" + seasonid;
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
 	var datastring =  JSON.stringify(data);
