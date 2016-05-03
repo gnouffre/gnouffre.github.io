@@ -28,10 +28,11 @@ var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv0
 var data = $.getJSON(urlwebapp, function(data) {
 	datastring =  JSON.stringify(data);
 	var vector = new ol.layer.Vector({
-		text: datastring,
-  		source: new ol.source.GeoJSON({
-    		projection: 'EPSG:3857',
-  })
+		source = new ol.source.Vector({
+  		format: new ol.format.GeoJSON({
+  			source : datastring
+  		})
+		})
 });
 
 var map = new ol.Map({
