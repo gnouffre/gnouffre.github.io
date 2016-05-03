@@ -7,7 +7,7 @@
   
     <script type="text/javascript">
       function callSHOWMAP(parameter) {
-        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter
+        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec" + parameter
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
 	var datastring =  JSON.stringify(data);
@@ -15,15 +15,7 @@
   	
 	});
       };
-      function getMap(parameter, seasonid) {
-        var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeselection=" + parameter + "&seasonid=" + seasonid;
-        // Create an execution request object.
-	$.getJSON(urlwebapp, function(data) {
-	var datastring =  JSON.stringify(data);
-	$('#result').html(datastring);
-  	
-	});
-      };
+
 function videConsole() {
 	$('#result').html("Waiting order ...");
 };
@@ -39,11 +31,11 @@ function videConsole() {
         
         <div id="consoleResult" class="gwd-p-19s1">
         <input type="button" value="Get season list"
-        onclick="callSHOWMAP('SEASONLIST');" />
+        onclick="callSHOWMAP('?SEASONLIST');" />
         <input type="button" value="get Clan List"
-        onclick="callSHOWMAP('CLANLIST');" />
+        onclick="callSHOWMAP('?CLANLIST');" />
         <input type="button" value="get lastMap"
-        onclick="getMap('MAP', 'asian_typhoon');" />
+        onclick="callSHOWMAP('?MAP&seasonid=asian_typhoon');" />
         <input type="button" value="Vider la console"
         onclick="videConsole();" />
         </div>
