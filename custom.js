@@ -392,8 +392,11 @@ function chargerlasave(save) {
 			$('#ModeAffichage option[value="Batailles2"]').attr("disabled", "disabled");
 		}
 		if (save) {
-			listeclan = affichageclanproperty("LOADSAVE", save, false);
-			listeinfos = JSON.parse(listeclan);
+			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=LOADSAVE&save="+ save;
+			$.getJSON(urlwebapp, function(data) {
+			listeinfos = data;  
+	
+		
 
 			if (listeinfos['season_id']) {
 				var lamapsave = 'tools/map/' + listeinfos['season_id'] + '.geojson';
@@ -467,6 +470,7 @@ function chargerlasave(save) {
 				console.log('fin de Mode affichage', new Date());
 				preloader.hide();
 			};
+			});
 		}
 		console.log('fin de chargerlasave', new Date());
 	}, 100);
@@ -2239,7 +2243,13 @@ function getInfoBattle(idprov, provname) {
 	var contenuBattle;
 	$("html").addClass("wait");
 	setTimeout(function () {
-	affichageclanproperty("BATTLETURNINFO", idprov, false);
+	
+	var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=BATTLETURNINFO&provinceId=" + idprov;
+	$.getJSON(urlwebapp, function(data) {
+	listturnbattles = data;  
+
+	
+	//affichageclanproperty("BATTLETURNINFO", idprov, false);
 	console.log(listturnbattles);
 	$('#InfoBattlesID').html('Battle on : ' + provname + '<input id="clikprovClan" onclick="clikprovClan(\''+idprov+'\')" type="button" data-toggle="tooltip" title="Return prov detail" value="' +idprov+ '" class="btn btn-primary">');
 	var turnnumber = Object.keys(listturnbattles).length;
@@ -2391,6 +2401,7 @@ function getInfoBattle(idprov, provname) {
 				$('#BattleInfo').modal('show');
 				$("html").removeClass("wait");
 			};
+			});
 					}, 100);
 	
 };
