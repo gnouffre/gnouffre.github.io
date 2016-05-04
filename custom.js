@@ -2605,14 +2605,14 @@ function showLogTab9(idlog) {
 			Filterprovinceonmap();
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
-				var rows = $('#tabs-9tab').DataTable().rows( { filter: 'applied' } );
+				var rows = $('#tabs-9tab').DataTable().rows( { filter: 'applied' } ).data();
 				var filteredclan = $.unique(rows);
 				var filteredclantag = $.map(filteredclan, function (node) {
 						var Textclan = node.cells[1].textContent;
 						return Textclan;
 					});
 				yadcf.exFilterColumn(clanTable, [[1, filteredclantag]]);
-				var rows2 = clanTable.rows( { filter: 'applied' } );
+				var rows2 = clanTable.rows( { filter: 'applied' } ).data();
 				$('#presult').text('Result => Province Found : ' + rows.length + ' / Clan Found : ' + rows2.length);
 				if (rows.length == $('#tabs-9tab').dataTable().fnGetData().length) {
 					$('#result_filters').removeClass('btn btn-success');
