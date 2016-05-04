@@ -220,6 +220,8 @@ $(document).ajaxStop(function () {
 	// due to ajax async, i can try to put lastsave while select save was empty, so the select is void on first load of page
 	$('#preloaderPage').hide();
 	console.log('fin de tous les AJAX', new Date());
+		/***************** Wow.js ******************/
+	new WOW().init();
 });
 
 /* $(document).ajaxStart(function () {
@@ -3461,8 +3463,7 @@ console.log('debut traitement termplate', new Date());
 	$(window).resize(function () {
 		$('#owl-hero .item').css('height', slideHeight);
 	});
-	/***************** Wow.js ******************/
-	new WOW().init();
+
 
 	/***************** YADCF Bootstrap style .js ******************/
 	function yadcfAddBootstrapClass() {
