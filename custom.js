@@ -2601,41 +2601,7 @@ function showLogTab9(idlog) {
 		var titlecolumns = $.map(columnheader, function (node) {
 				return node.textContent;
 			});
-		// table change detected : sync data clan and redraw map
-		oTable.on('search.dt', function () {
-		console.log('search dt detected')
-			//Filterprovinceonmap();
-			$(document).ready(function () {
-				yadcf.exResetAllFilters(clanTable);
-				var rows = $('#tabs-9tab').dataTable().$('tr', {
-						"filter" : "applied"
-					});
-				var filteredclan = $.unique(rows);
-				var filteredclantag = $.map(filteredclan, function (node) {
-						var Textclan = node.cells[1].textContent;
-						return Textclan;
-					});
-				yadcf.exFilterColumn(clanTable, [[1, filteredclantag]]);
-				var rows2 = clanTable.$('tr', {
-						"filter" : "applied"
-					});
-				$('#presult').text('Result => Province Found : ' + rows.length + ' / Clan Found : ' + rows2.length);
-				if (rows.length == $('#tabs-9tab').dataTable().fnGetData().length) {
-					$('#result_filters').removeClass('btn btn-success');
-					$('#result_filters').addClass('btn btn-default');
-					$('#result_filters').text('Prov:' + rows.length + ' Clan:' + rows2.length + '(No Filter)');
-				} else {
-					$('#result_filters').removeClass('btn btn-default');
-					$('#result_filters').addClass('btn btn-success');
-					$('#result_filters').text('Prov:' + rows.length + ' Clan:' + rows2.length + '(Filtered)');
-				}
-				var modAff = $('#ModeAffichage').val();
-				ModeAffichage(modAff);
-			});
-			$('select[id^= "yadcf-filter-"][class*="select2"]').each(function () {
-				$(this).select2("close");
-			});
-		});
+
 		// initialiize Filter for this table
 		// actually Filter range slider is bugged, stay with range value
 		// until YADCF was corrected (https://github.com/vedmack/yadcf/issues/308)
@@ -3342,6 +3308,37 @@ console.log('debut fonction charger provvince', new Date());
 
 function Filterprovinceonmap() {
 console.log('debut fonction filteronmap', new Date());
+
+$(document).ready(function () {
+
+				yadcf.exResetAllFilters(clanTable);
+				var rows = $('#tabs-9tab').dataTable().$('tr', {
+						"filter" : "applied"
+					});
+				var filteredclan = $.unique(rows);
+				var filteredclantag = $.map(filteredclan, function (node) {
+						var Textclan = node.cells[1].textContent;
+						return Textclan;
+					});
+				yadcf.exFilterColumn(clanTable, [[1, filteredclantag]]);
+				var rows2 = clanTable.$('tr', {
+						"filter" : "applied"
+					});
+				$('#presult').text('Result => Province Found : ' + rows.length + ' / Clan Found : ' + rows2.length);
+				if (rows.length == $('#tabs-9tab').dataTable().fnGetData().length) {
+					$('#result_filters').removeClass('btn btn-success');
+					$('#result_filters').addClass('btn btn-default');
+					$('#result_filters').text('Prov:' + rows.length + ' Clan:' + rows2.length + '(No Filter)');
+				} else {
+					$('#result_filters').removeClass('btn btn-default');
+					$('#result_filters').addClass('btn btn-success');
+					$('#result_filters').text('Prov:' + rows.length + ' Clan:' + rows2.length + '(Filtered)');
+				}
+				var modAff = $('#ModeAffichage').val();
+				ModeAffichage(modAff);
+				$('select[id^= "yadcf-filter-"][class*="select2"]').each(function () {
+				$(this).select2("close");
+
 	// this function scan the Datatable PROVINCE, and add all province on map.
 	// usefull to redraw the map when filter change.
 	var vector = getLayerwarg(layers, "wargaming");
@@ -3379,6 +3376,11 @@ console.log('debut fonction filteronmap', new Date());
 			carteincomplete.addFeature(feature.clone());
 		};
 	});
+	
+			
+			});
+
+			});
 	console.log('fin fonction filteronmap', new Date());
 };
 
