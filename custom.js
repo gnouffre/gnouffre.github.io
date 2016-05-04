@@ -2602,6 +2602,10 @@ function showLogTab9(idlog) {
 				return node.textContent;
 			});
 
+			oTable.on('search.dt', function () {
+		console.log('search dt detected')
+			Filterprovinceonmap();
+			});
 		// initialiize Filter for this table
 		// actually Filter range slider is bugged, stay with range value
 		// until YADCF was corrected (https://github.com/vedmack/yadcf/issues/308)
