@@ -2472,7 +2472,7 @@ function showLogTab9(idlog) {
 				paging : false,
 				scrollCollapse : true,
 				colReorder : true,
-				deferRender : false,
+				deferRender : true,
 				paginate : true,
 				autoFill : true,
 				processing : true,
