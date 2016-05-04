@@ -2605,7 +2605,7 @@ function showLogTab9(idlog) {
 			Filterprovinceonmap();
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
-				var rows = $('#tabs-9tab').DataTable().rows( { filter: 'applied' } ).data();
+				var rows = $('#tabs-9tab').DataTable().column(1, { filter: 'applied' } ).data();
 				var filteredclan = $.unique(rows);
 				var filteredclantag = $.map(filteredclan, function (node) {
 						var Textclan = node.cells[1].textContent;
