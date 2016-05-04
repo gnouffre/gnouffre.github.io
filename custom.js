@@ -2593,6 +2593,10 @@ function showLogTab9(idlog) {
 						title : "captures",
 						data : "captures",
 						"bVisible" : false
+					}, {
+						title : "tag",
+						data : "tag",
+						visible : false,
 					}
 				]
 			});
@@ -2605,7 +2609,7 @@ function showLogTab9(idlog) {
 			Filterprovinceonmap();
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
-				var rows = $('#tabs-9tab').DataTable().column(1, { filter: 'applied' } ).data();
+				var rows = $('#tabs-9tab').DataTable().column(32, { filter: 'applied' } ).data();
 				var filteredclan = rows.unique();
 				yadcf.exFilterColumn(clanTable, [[1, filteredclan]]);
 				var rows2 = clanTable.column(1, { filter: 'applied' } ).data();
@@ -3282,7 +3286,8 @@ console.log('debut fonction chrger tableau province', new Date());
 			'wins_10_level' : wins_10_level,
 			'losses' : losses,
 			'provinces_count' : provinces_count,
-			'captures' : captures
+			'captures' : captures,
+			'tag' : nomclan
 		});
 	});
 	var tableLog = $("#tabs-9tab").DataTable();
