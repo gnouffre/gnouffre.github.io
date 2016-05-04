@@ -3297,7 +3297,7 @@ console.log('debut fonction chrger tableau province', new Date());
 	tableLog.clear();
 	tableLog.rows.add(tabevent);
 	tableLog.columns.adjust();
-	tableLog.draw();
+	//tableLog.draw();
 	console.log('fin charger table province fonction', new Date());
 
 	// active or desactivate resync clan button
