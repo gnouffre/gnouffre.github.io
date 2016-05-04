@@ -2607,7 +2607,7 @@ function showLogTab9(idlog) {
 				yadcf.exResetAllFilters(clanTable);
 				var rows = $('#tabs-9tab').DataTable().column(1, { filter: 'applied' } ).data();
 				var filteredclan = rows.unique();
-				yadcf.exFilterColumn(clanTable, [[1, filteredclantag]]);
+				yadcf.exFilterColumn(clanTable, [[1, filteredclan]]);
 				var rows2 = clanTable.column(1, { filter: 'applied' } ).data();
 				$('#presult').text('Result => Province Found : ' + rows.length + ' / Clan Found : ' + rows2.length);
 				if (rows.length == $('#tabs-9tab').dataTable().fnGetData().length) {
