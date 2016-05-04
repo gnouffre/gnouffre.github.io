@@ -2604,6 +2604,7 @@ function showLogTab9(idlog) {
 			});
 		// table change detected : sync data clan and redraw map
 		oTable.on('search.dt', function () {
+		console.log('search dt detected')
 			Filterprovinceonmap();
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
@@ -3167,9 +3168,13 @@ console.log('debut fonction chargement tableau clan', new Date());
 				'forceRefresh' : '<a class="btn btn-info" data-toggle="tooltip" title="Force refresh Clan"><i class="fa fa-refresh " onclick="refreshclan(\'' + annuaireclan[clan].id + '\', \'tableclan\')"></i></a>'
 			});
 		});
+		console.log("before table clear", new Date());
 		clanTable.clear();
+		console.log("before table add row", new Date());
 		clanTable.rows.add(tabevent);
+		console.log("before table adjust", new Date());
 		clanTable.columns.adjust();
+		console.log("before table draw", new Date());
 		clanTable.draw();
 		console.log('fin fonction charger table clan', new Date());
 }
