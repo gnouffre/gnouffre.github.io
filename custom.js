@@ -443,7 +443,7 @@ function chargerlasave(save) {
 							map.unByKey(listenerchangelayer);
 							chargerlalog();
 							console.log('fin de charger la log', new Date());
-							Filterprovinceonmap();
+							//Filterprovinceonmap();
 							console.log('fin de filter on province', new Date());
 							var modAff = $('#ModeAffichage').val();
 							ModeAffichage(modAff);
@@ -465,7 +465,7 @@ function chargerlasave(save) {
 				varlayersource = vector.getSource();
 				chargerlalog();
 				console.log('fin de  charger log sans changement de carte', new Date());
-				Filterprovinceonmap();
+				//Filterprovinceonmap();
 				console.log('debut de filteron province sans changement de carte', new Date());
 				var modAff = $('#ModeAffichage').val();
 				ModeAffichage(modAff);
