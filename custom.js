@@ -2606,7 +2606,7 @@ function showLogTab9(idlog) {
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
 				var rows = $('#tabs-9tab').DataTable().column(1, { filter: 'applied' } ).data();
-				var filteredclan = $.unique(rows);
+				var filteredclan = rows.unique();
 				var filteredclantag = $.map(filteredclan, function (node) {
 						var Textclan = node.cells[1].textContent;
 						return Textclan;
