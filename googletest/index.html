@@ -6,14 +6,86 @@
    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
   <link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
   <script src="http://openlayers.org/en/v3.15.1/build/ol.js"></script>
+  <script src=" lokijs.js"></script>
     <script type="text/javascript">
+	
+	
+	// init de la base //
+
+  db_data = new loki('data.json', { env: 'BROWSER'})
+  db_data.loadDatabase();
+  db_map = new loki('map.json', { env: 'BROWSER'});
+  db_save = new loki('save.json', { env: 'BROWSER'});
+
+	
+	 function saveloki() {
+	 db_data.saveDatabase();
+	 db_map.saveDatabase();
+	 db_save.saveDatabase();
+	 }
+	 
+		 function clearloki() {
+	 db_data.listCollections( ).forEach(function(coll) {
+    coll.chain().remove();
+	});
+		 db_map.listCollections( ).forEach(function(coll) {
+    coll.chain().remove();
+	});	 
+	db_save.listCollections( ).forEach(function(coll) {
+    coll.chain().remove();
+	});
+	 
+	 }
+	
+		 function showloki(dbname) {
+		 var mydata = [];
+		 
+switch (dbname) {
+	case 'data':
+	    	db_data.listCollections().forEach(function(coll) {
+			console.log(coll);
+			mydata.push(db_data.getCollection(coll.name).data);
+			});
+
+		break;
+	case 'map':
+		db_map.listCollections( ).forEach(function(coll) {
+			mydata.push(db_map.getCollection(coll.name).data);
+			});
+		break;
+	case 'save':
+			db_save.listCollections( ).forEach(function(coll) {
+			mydata.push(db_save.getCollection(coll.name).data);
+			});
+		break;
+	default:
+		break;
+	}
+		var datastring = JSON.stringify(mydata);
+		$('#result').html(datastring);
+	 }
+	 
+	
       function callSHOWMAP(parameter) {
         var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec" + parameter
         // Create an execution request object.
 	$.getJSON(urlwebapp, function(data) {
 	var datastring =  JSON.stringify(data);
 	$('#result').html(datastring);
-  	
+switch (parameter) {
+	case '?typeSelection=SEASONLIST':
+	    	if (!db_data.getCollection("SEASONLIST")) {
+			var seasonColl = db_data.addCollection('SEASONLIST');
+			seasonColl.insert(data);
+			} else {
+			var seasonColl = db_data.getCollection('SEASONLIST');
+			}
+			
+		break;
+
+	default:
+		break;
+	}
 	});
       };
 
@@ -49,6 +121,17 @@ var map = new ol.Map({
   })
 });
 };
+
+window.onbeforeunload = function (e) {
+	 saveloki();
+ 
+}
+
+
+	 function showLocalStorage() {
+var datastring = JSON.stringify(localStorage);
+		$('#result').html(datastring);
+	 }
     </script>
 
 
@@ -64,10 +147,14 @@ var map = new ol.Map({
         onclick="callSHOWMAP('?typeSelection=SEASONLIST');" />
         <input type="button" value="get Clan List"
         onclick="callSHOWMAP('?typeSelection=CLANLIST');" />
-        <input type="button" value="get lastMap"
+        <input type="button" value="get typhoon map"
         onclick="callSHOWMAP('?typeSelection=MAP&amp;seasonid=asian_typhoon');" />
-         <input type="button" value="Show Map"
+		 <input type="button" value="get europe map"
+        onclick="callSHOWMAP('?typeSelection=MAP&amp;seasonid=europemap');" />
+         <input type="button" value="Show Map typhoon"
         onclick="videConsole();showOL3('?typeSelection=MAP&amp;seasonid=asian_typhoon');" />
+		 <input type="button" value="Show Map europ"
+        onclick="videConsole();showOL3('?typeSelection=MAP&amp;seasonid=europemap');" />
         <input type="button" value="ALLSAVE"
         onclick="callSHOWMAP('?typeSelection=ALLSAVE');" />
         <input type="button" value="LOADSAVE"
@@ -76,6 +163,22 @@ var map = new ol.Map({
         onclick="videConsole();" />
         </div>
 		  <div id="consoleControle" class="gwd-p-avfd">
+		  <p class="gwd-p-nxhm"><u>test de lokijs</u>
+		  <div  >
+        <input type="button" value="look data - json"
+        onclick="showloki('data');" />
+		<input type="button" value="look map - json"
+        onclick="showloki('map');" />
+		<input type="button" value="look save - json"
+        onclick="showloki('save');" />
+		<input type="button" value="SAVE DB "
+        onclick="saveloki();" />
+		<input type="button" value="CLEAR DB "
+        onclick="clearloki();" />
+		 <input type="button" value="show local storage"
+        onclick="showLocalStorage();" />
+		 </div>  
+		  
 		  <p class="gwd-p-icmo">RESULTAT</p>
           <div id="result" > Waiting order ... </div>
         </div>
