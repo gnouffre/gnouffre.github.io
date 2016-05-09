@@ -150,6 +150,10 @@ var dernieresave = 'extraction.json';
 // prepare database from Loki 
  db_data = new loki('data.json', { env: 'BROWSER'})
  db_data.loadDatabase();
+ db_data.listCollections( ).forEach(function(coll) {
+    coll.chain().remove();
+	});
+	
  db_map = new loki('map.json', { env: 'BROWSER'});
  db_map.loadDatabase();
  db_save = new loki('save.json', { env: 'BROWSER'});
@@ -162,7 +166,13 @@ var dernieresave = 'extraction.json';
 //affichageclanproperty("ALLSAVE", " ", true);
     var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=SEASONLIST";
 	$.getJSON(urlwebapp, function(data) {
-	seasondata = data;  
+	seasondata = data; 
+	if (!db_data.getCollection("SEASONLIST")) {
+			var seasonColl = db_data.addCollection('SEASONLIST');
+			seasonColl.insert(data);
+			} else {
+			var seasonColl = db_data.getCollection('SEASONLIST');
+			};
 	loadLogSeason();
 	});
 
