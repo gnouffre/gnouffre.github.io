@@ -151,7 +151,8 @@ var dernieresave = 'extraction.json';
  db_data = new loki('data.json', { env: 'BROWSER'})
  db_data.loadDatabase();
  db_data.listCollections( ).forEach(function(coll) {
-    coll.chain().remove();
+    db_data.getCollection(coll.name).chain().remove();
+	//coll.chain().remove();
 	});
 	
  db_map = new loki('map.json', { env: 'BROWSER'});
