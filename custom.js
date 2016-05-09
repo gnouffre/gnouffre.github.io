@@ -179,12 +179,24 @@ var dernieresave = 'extraction.json';
 	var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=CLANLIST";
 	$.getJSON(urlwebapp, function(data) {
 	annuaireclan = data;  
+	if (!db_data.getCollection("CLANLIST")) {
+			var clanColl = db_data.addCollection('CLANLIST');
+			clanColl.insert(data);
+			} else {
+			var clanColl = db_data.getCollection('CLANLIST');
+			};
 	loadLogClan();
 	});
 
 	var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=ALLSAVE";
 	$.getJSON(urlwebapp, function(data) {
-	listesaveresult = data;  
+	listesaveresult = data; 
+	if (!db_data.getCollection("ALLSAVE")) {
+			var saveColl = db_data.addCollection('ALLSAVE');
+			saveColl.insert(data);
+			} else {
+			var saveColl = db_data.getCollection('ALLSAVE');
+			};
 	chargerlalistesave();
 	chargerlasave('extraction.json');
 	});	
