@@ -146,6 +146,16 @@ var annuaireclan;
 var listesaveresult;
 var listturnbattles;
 var dernieresave = 'extraction.json';
+
+// prepare database from Loki 
+ db_data = new loki('data.json', { env: 'BROWSER'})
+ db_data.loadDatabase();
+ db_map = new loki('map.json', { env: 'BROWSER'});
+ db_map.loadDatabase();
+ db_save = new loki('save.json', { env: 'BROWSER'});
+ db_save.loadDatabase();
+
+
 //var datedernieresave;
 //affichageclanproperty("SEASONDATA", " ", true);
 //affichageclanproperty("CLANLIST", " ", true);
