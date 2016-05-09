@@ -171,6 +171,7 @@ var dernieresave = 'extraction.json';
 	if (!db_data.getCollection("SEASONLIST")) {
 			var seasonColl = db_data.addCollection('SEASONLIST');
 			seasonColl.insert(seasondata);
+			db_data.saveDatabase();
 			} else {
 			var seasonColl = db_data.getCollection('SEASONLIST');
 			};
@@ -183,6 +184,7 @@ var dernieresave = 'extraction.json';
 	if (!db_data.getCollection("CLANLIST")) {
 			var clanColl = db_data.addCollection('CLANLIST');
 			clanColl.insert(annuaireclan);
+			db_data.saveDatabase();
 			} else {
 			var clanColl = db_data.getCollection('CLANLIST');
 			};
@@ -195,6 +197,7 @@ var dernieresave = 'extraction.json';
 	if (!db_data.getCollection("ALLSAVE")) {
 			var saveColl = db_data.addCollection('ALLSAVE');
 			saveColl.insert(listesaveresult);
+			db_data.saveDatabase();
 			} else {
 			var saveColl = db_data.getCollection('ALLSAVE');
 			};
