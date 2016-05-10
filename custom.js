@@ -474,7 +474,7 @@ function chargerlasave2(listeinfos) {
 			}) 
 			}
 			else {
-			listemapColl = db_map.getCollection(save);
+			listemapColl = db_map.getCollection(chargedgeojson);
 			var mamap = listemapColl.chain( ).data()[0];
 			datastring =  JSON.stringify(mamap);
 			var geojsonFormat = new ol.format.GeoJSON();
