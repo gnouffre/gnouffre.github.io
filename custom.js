@@ -434,13 +434,13 @@ function chargerlasave(save) {
 			var listeinfosColl = db_save.addCollection(save);
 			listeinfosColl.insert(data);
 			db_save.saveDatabase();
-			listeinfos = listeinfosColl.chain( ).data();
+			listeinfos = listeinfosColl.chain( ).data()[0];
 			chargerlasave2(listeinfos);
 			}) 
 			}
 			else {
 			listeinfosColl = db_save.getCollection(save);
-			listeinfos = listeinfosColl.chain( ).data();
+			listeinfos = listeinfosColl.chain( ).data()[0];
 			chargerlasave2(listeinfos);
 			};
  }
@@ -465,8 +465,8 @@ function chargerlasave2(listeinfos) {
 			var listemapColl = db_map.addCollection(chargedgeojson);
 			listemapColl.insert(data);
 			db_map.saveDatabase();
-			listeinfos = listeinfosColl.chain( ).data();
-			datastring =  JSON.stringify(listeinfos);
+			var mamap = listemapColl.chain( ).data()[0];
+			datastring =  JSON.stringify(mamap);
 			var geojsonFormat = new ol.format.GeoJSON();
 			var features = geojsonFormat.readFeatures(datastring,
 			{featureProjection: 'EPSG:3857'});
@@ -474,9 +474,9 @@ function chargerlasave2(listeinfos) {
 			}) 
 			}
 			else {
-			listeinfosColl = db_map.getCollection(save);
-			listeinfos = listeinfosColl.chain( ).data();
-			datastring =  JSON.stringify(listeinfos);
+			listemapColl = db_map.getCollection(save);
+			var mamap = listemapColl.chain( ).data()[0];
+			datastring =  JSON.stringify(mamap);
 			var geojsonFormat = new ol.format.GeoJSON();
 			var features = geojsonFormat.readFeatures(datastring,
 			{featureProjection: 'EPSG:3857'});
