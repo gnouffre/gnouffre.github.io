@@ -169,8 +169,9 @@ var dernieresave = 'extraction.json';
 	$.getJSON(urlwebapp, function(data) {
 	seasondata = data; 
 	if (!db_data.getCollection("SEASONLIST")) {
-			var seasonColl = db_data.addCollection('SEASONLIST');
-			seasonColl.insert(seasondata);
+			var seasonColl = db_data.addCollection('SEASONLIST', unique: ['season_id']);
+			var arrseasondata = Object.keys(seasondata).map(function(k) { return seasondata[k] });
+			seasonColl.insert(arrseasondata);
 			db_data.saveDatabase();
 			} else {
 			var seasonColl = db_data.getCollection('SEASONLIST');
@@ -182,8 +183,9 @@ var dernieresave = 'extraction.json';
 	$.getJSON(urlwebapp, function(data) {
 	annuaireclan = data;  
 	if (!db_data.getCollection("CLANLIST")) {
-			var clanColl = db_data.addCollection('CLANLIST');
-			clanColl.insert(annuaireclan);
+			var clanColl = db_data.addCollection('CLANLIST', unique: ['id']);
+			var arrannuaireclan = Object.keys(annuaireclan).map(function(k) { return annuaireclan[k] });
+			clanColl.insert(arrannuaireclan);
 			db_data.saveDatabase();
 			} else {
 			var clanColl = db_data.getCollection('CLANLIST');
@@ -195,7 +197,7 @@ var dernieresave = 'extraction.json';
 	$.getJSON(urlwebapp, function(data) {
 	listesaveresult = data; 
 	if (!db_data.getCollection("ALLSAVE")) {
-			var saveColl = db_data.addCollection('ALLSAVE');
+			var saveColl = db_data.addCollection('ALLSAVE', unique: ['fichier']);
 			saveColl.insert(listesaveresult);
 			db_data.saveDatabase();
 			} else {
