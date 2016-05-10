@@ -151,7 +151,7 @@ var dernieresave = 'extraction.json';
  db_data = new loki('data.json', { env: 'BROWSER'})
  db_data.loadDatabase();
  db_data.listCollections( ).forEach(function(coll) {
-    db_data.getCollection(coll.name).chain().remove();
+ db_data.getCollection(coll.name).chain().remove();
 	//coll.chain().remove();
 	});
 	
@@ -336,9 +336,6 @@ var keyclik = map.on('click', function (evt) {
 		}, 100);
 	});
 	
-	
-
-	
 
 
 map.getView().on('propertychange', function (e) {
@@ -430,36 +427,64 @@ function chargerlasave(save) {
 			$('#ModeAffichage option[value="Batailles2"]').attr("disabled", "disabled");
 		}
 		if (save) {
-			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=LOADSAVE&save="+ save;
-			$.getJSON(urlwebapp, function(data) {
-			listeinfos = data;  
 	
-		
-
-			if (listeinfos['season_id']) {
-				var lamapsave = 'tools/map/' + listeinfos['season_id'] + '.geojson';
-			} else {
-				var lamapsave = 'tools/map/europemap.geojson';
+			if (!db_save.getCollection(save)) {
+			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=LOADSAVE&save="+ save;
+			$.getJSON(urlwebapp, function(data) { 
+			var listeinfosColl = db_save.addCollection(save);
+			var arrlisteinfos = Object.keys(data).map(function(k) { return data[k] });
+			listeinfosColl.insert(arrlisteinfos);
+			db_save.saveDatabase();
+			listeinfos = listeinfosColl.chain( ).data();
+			chargerlasave2(listeinfos);
+			}) 
+			}
+			else {
+			listeinfosColl = db_save.getCollection(save);
+			listeinfos = listeinfosColl.chain( ).data();
+			chargerlasave2(listeinfos);
 			};
+ }
+		console.log('fin de chargerlasave', new Date());
+	}, 100);
+ };
+	
+function chargerlasave2(listeinfos) {		
+
 			layers = map.getLayers().getArray();
 			vector = getLayerwarg(layers, "wargaming");
 			// optimization : reload geojson map only if change
 			if (chargedgeojson != listeinfos['season_id']) {
 				chargedgeojson = listeinfos['season_id'];
 				map.removeLayer(vector);
-		
-				var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=MAP&seasonid=" + chargedgeojson;
-				var data = $.getJSON(urlwebapp, function(data) {
-				datastring =  JSON.stringify(data);
-				var geojsonFormat = new ol.format.GeoJSON();
-				var features = geojsonFormat.readFeatures(datastring,
-				{featureProjection: 'EPSG:3857'});
-				masource.addFeatures(features);
-				});
-				
 				var masource = new ol.source.Vector({
 				format: new ol.format.GeoJSON()
 				});	
+			if (!db_map.getCollection(chargedgeojson)) {
+			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=MAP&seasonid=" + chargedgeojson;
+			$.getJSON(urlwebapp, function(data) { 
+			var listemapColl = db_map.addCollection(chargedgeojson);
+			listemapColl.insert(data);
+			db_map.saveDatabase();
+			listeinfos = listeinfosColl.chain( ).data();
+			datastring =  JSON.stringify(listeinfos);
+			var geojsonFormat = new ol.format.GeoJSON();
+			var features = geojsonFormat.readFeatures(datastring,
+			{featureProjection: 'EPSG:3857'});
+			masource.addFeatures(features);
+			}) 
+			}
+			else {
+			listeinfosColl = db_map.getCollection(save);
+			listeinfos = listeinfosColl.chain( ).data();
+			datastring =  JSON.stringify(listeinfos);
+			var geojsonFormat = new ol.format.GeoJSON();
+			var features = geojsonFormat.readFeatures(datastring,
+			{featureProjection: 'EPSG:3857'});
+			masource.addFeatures(features);
+			};
+		
+
 
 				
 				cartecomplete = new ol.layer.Vector({
@@ -508,11 +533,7 @@ function chargerlasave(save) {
 				console.log('fin de Mode affichage', new Date());
 				preloader.hide();
 			};
-			});
-		}
-		console.log('fin de chargerlasave', new Date());
-	}, 100);
-};
+			};
 
 function ModeAffichage(mode) {
 	// this function analyse which display mode was choosen ,then
@@ -2102,7 +2123,7 @@ function effacerbatailles() {
 	map.removeLayer(vector);
 };
 
-function affichageclanproperty(entree, clanid, async) {
+/* function affichageclanproperty(entree, clanid, async) {
 	// FUNCTION TO CALL ALL PHP METHOD NEEDED FOR THIS PAGE
 	var resultatajax = "";
 
@@ -2121,7 +2142,7 @@ function affichageclanproperty(entree, clanid, async) {
 	});
 
 	return resultatajax;
-};
+}; */
 
 
 function googleScript(parameter) {
