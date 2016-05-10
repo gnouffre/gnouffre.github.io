@@ -432,8 +432,7 @@ function chargerlasave(save) {
 			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=LOADSAVE&save="+ save;
 			$.getJSON(urlwebapp, function(data) { 
 			var listeinfosColl = db_save.addCollection(save);
-			var arrlisteinfos = Object.keys(data).map(function(k) { return data[k] });
-			listeinfosColl.insert(arrlisteinfos);
+			listeinfosColl.insert(data);
 			db_save.saveDatabase();
 			listeinfos = listeinfosColl.chain( ).data();
 			chargerlasave2(listeinfos);
