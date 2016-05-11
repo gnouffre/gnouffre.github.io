@@ -450,7 +450,7 @@ function chargerlasave2(listeinfos) {
 				format: new ol.format.GeoJSON()
 				});	
 
-			
+			if (!db_map.getCollection(chargedgeojson)) {
 			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=MAP&seasonid=" + chargedgeojson;
 			$.getJSON(urlwebapp, function(data) { 
 			var listemapColl = db_map.addCollection(chargedgeojson);
