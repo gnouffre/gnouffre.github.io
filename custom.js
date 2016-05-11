@@ -460,7 +460,12 @@ function chargerlasave2(listeinfos) {
 				var masource = new ol.source.Vector({
 				format: new ol.format.GeoJSON()
 				});	
+				// local storage is limited to 5mb, only last map...
 			if (!db_map.getCollection(chargedgeojson)) {
+			 db_map.listCollections( ).forEach(function(coll) {
+				db_map.getCollection(coll.name).chain().remove();
+				});
+			
 			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=MAP&seasonid=" + chargedgeojson;
 			$.getJSON(urlwebapp, function(data) { 
 			var listemapColl = db_map.addCollection(chargedgeojson);
