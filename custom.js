@@ -491,9 +491,9 @@ function chargerlasave2(listeinfos) {
 						if (varlayersource.getState() === 'ready') {
 							// carte chargée
 							map.unByKey(listenerchangelayer);
-							chargerlalog();
+							//chargerlalog();
 							console.log('fin de charger la log', new Date());
-							Filterprovinceonmap();
+							//Filterprovinceonmap();
 							console.log('fin de filter on province', new Date());
 							var modAff = $('#ModeAffichage').val();
 							ModeAffichage(modAff);
@@ -513,9 +513,9 @@ function chargerlasave2(listeinfos) {
 			} else {
 				vector = getLayerwarg(layers, "wargaming");
 				varlayersource = vector.getSource();
-				chargerlalog();
+				//chargerlalog();
 				console.log('fin de  charger log sans changement de carte', new Date());
-				Filterprovinceonmap();
+				//Filterprovinceonmap();
 				console.log('debut de filteron province sans changement de carte', new Date());
 				var modAff = $('#ModeAffichage').val();
 				ModeAffichage(modAff);
