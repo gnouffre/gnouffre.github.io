@@ -499,7 +499,7 @@ cartecomplete = new ol.layer.Vector({
 				layers = map.getLayers().getArray();
 				vector = getLayerwarg(layers, "wargaming");
 				varlayersource = vector.getSource();
-				varlayersource.changed();
+				
 
 				var listenerchangelayer = varlayersource.once('change', function (e) {
 				console.log('debut detection changement de layer', new Date());
@@ -525,6 +525,7 @@ cartecomplete = new ol.layer.Vector({
 							
 						};
 					});
+					varlayersource.changed();
 }
 
 function ModeAffichage(mode) {
