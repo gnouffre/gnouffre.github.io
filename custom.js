@@ -149,16 +149,9 @@ var dernieresave = 'extraction.json';
 
 // prepare database from Loki 
  db_data = new loki('data.json', { env: 'BROWSER'})
- db_data.loadDatabase();
- db_data.listCollections( ).forEach(function(coll) {
- db_data.getCollection(coll.name).chain().remove();
-	//coll.chain().remove();
-	});
 	
  db_map = new loki('map.json', { env: 'BROWSER'});
- db_map.loadDatabase();
  db_save = new loki('save.json', { env: 'BROWSER'});
- db_save.loadDatabase();
 
 
 //var datedernieresave;
@@ -172,7 +165,6 @@ var dernieresave = 'extraction.json';
 			var seasonColl = db_data.addCollection('SEASONLIST', { unique: ['season_id']});
 			var arrseasondata = Object.keys(seasondata).map(function(k) { return seasondata[k] });
 			seasonColl.insert(arrseasondata);
-			db_data.saveDatabase();
 			} else {
 			var seasonColl = db_data.getCollection('SEASONLIST');
 			};
@@ -186,7 +178,6 @@ var dernieresave = 'extraction.json';
 			var clanColl = db_data.addCollection('CLANLIST', { unique: ['id']});
 			var arrannuaireclan = Object.keys(annuaireclan).map(function(k) { return annuaireclan[k] });
 			clanColl.insert(arrannuaireclan);
-			db_data.saveDatabase();
 			} else {
 			var clanColl = db_data.getCollection('CLANLIST');
 			};
@@ -199,7 +190,6 @@ var dernieresave = 'extraction.json';
 	if (!db_data.getCollection("ALLSAVE")) {
 			var saveColl = db_data.addCollection('ALLSAVE', { unique: ['fichier']});
 			saveColl.insert(listesaveresult);
-			db_data.saveDatabase();
 			} else {
 			var saveColl = db_data.getCollection('ALLSAVE');
 			};
@@ -433,7 +423,6 @@ function chargerlasave(save) {
 			$.getJSON(urlwebapp, function(data) { 
 			var listeinfosColl = db_save.addCollection(save);
 			listeinfosColl.insert(data);
-			db_save.saveDatabase();
 			listeinfos = listeinfosColl.chain( ).data()[0];
 			chargerlasave2(listeinfos);
 			}) 
@@ -460,17 +449,12 @@ function chargerlasave2(listeinfos) {
 				var masource = new ol.source.Vector({
 				format: new ol.format.GeoJSON()
 				});	
-				// local storage is limited to 5mb, only last map...
-			if (!db_map.getCollection(chargedgeojson)) {
-			 db_map.listCollections( ).forEach(function(coll) {
-				db_map.getCollection(coll.name).chain().remove();
-				});
+
 			
 			var urlwebapp = "https://script.google.com/macros/s/AKfycbxJmYTHBXM-_urMpk94iXv06jgCOjhGi7mljc39GYfhIZzq9Yo/exec?typeSelection=MAP&seasonid=" + chargedgeojson;
 			$.getJSON(urlwebapp, function(data) { 
 			var listemapColl = db_map.addCollection(chargedgeojson);
 			listemapColl.insert(data);
-			db_map.saveDatabase();
 			var mamap = listemapColl.chain( ).data()[0];
 			datastring =  JSON.stringify(mamap);
 			var geojsonFormat = new ol.format.GeoJSON();
