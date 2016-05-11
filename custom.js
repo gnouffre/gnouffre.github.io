@@ -445,6 +445,7 @@ function chargerlasave(save) {
 			};
  }
 		console.log('fin de chargerlasave', new Date());
+		preloader.hide();
 	}, 100);
  };
 	
@@ -517,7 +518,7 @@ function chargerlasave2(listeinfos) {
 								alert(e.message);
 							}
 							map.getView().setCenter(center2Layers);
-							preloader.hide();
+							
 						};
 					});
 			} else {
@@ -530,7 +531,7 @@ function chargerlasave2(listeinfos) {
 				var modAff = $('#ModeAffichage').val();
 				ModeAffichage(modAff);
 				console.log('fin de Mode affichage', new Date());
-				preloader.hide();
+				
 			};
 			};
 
