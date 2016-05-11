@@ -197,10 +197,8 @@ var dernieresave = 'extraction.json';
 	chargerlasave('extraction.json');
 	});	
 
-	
 
 
-//affichageclanproperty("DATELASTSAVE", " ", true);
 
 $(document).ajaxError(function (event, xhr, settings) {
 	// if the HOST limit the cpu or error on page request
@@ -461,6 +459,7 @@ function chargerlasave2(listeinfos) {
 			var features = geojsonFormat.readFeatures(datastring,
 			{featureProjection: 'EPSG:3857'});
 			masource.addFeatures(features);
+			chargerlasave3(masource);
 			}) 
 			}
 			else {
@@ -471,12 +470,27 @@ function chargerlasave2(listeinfos) {
 			var features = geojsonFormat.readFeatures(datastring,
 			{featureProjection: 'EPSG:3857'});
 			masource.addFeatures(features);
+			chargerlasave3(masource);
 			};
-		
-
 
 				
-				cartecomplete = new ol.layer.Vector({
+			} else {
+			    
+				vector = getLayerwarg(layers, "wargaming");
+				varlayersource = vector.getSource();
+				//chargerlalog();
+				console.log('fin de  charger log sans changement de carte', new Date());
+				//Filterprovinceonmap();
+				console.log('debut de filteron province sans changement de carte', new Date());
+				var modAff = $('#ModeAffichage').val();
+				ModeAffichage(modAff);
+				console.log('fin de Mode affichage', new Date());
+				
+			};
+			};
+			
+function chargerlasave3(masource) {
+cartecomplete = new ol.layer.Vector({
 						idbase : "wargaming",
 						source : masource
 					});
@@ -510,19 +524,7 @@ function chargerlasave2(listeinfos) {
 							
 						};
 					});
-			} else {
-				vector = getLayerwarg(layers, "wargaming");
-				varlayersource = vector.getSource();
-				//chargerlalog();
-				console.log('fin de  charger log sans changement de carte', new Date());
-				//Filterprovinceonmap();
-				console.log('debut de filteron province sans changement de carte', new Date());
-				var modAff = $('#ModeAffichage').val();
-				ModeAffichage(modAff);
-				console.log('fin de Mode affichage', new Date());
-				
-			};
-			};
+}
 
 function ModeAffichage(mode) {
 	// this function analyse which display mode was choosen ,then
