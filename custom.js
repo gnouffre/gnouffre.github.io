@@ -478,7 +478,7 @@ function chargerlasave2(listeinfos) {
 			    
 				vector = getLayerwarg(layers, "wargaming");
 				varlayersource = vector.getSource();
-				//chargerlalog();
+				chargerlalog();
 				console.log('fin de  charger log sans changement de carte', new Date());
 				//Filterprovinceonmap();
 				console.log('debut de filteron province sans changement de carte', new Date());
@@ -506,7 +506,7 @@ cartecomplete = new ol.layer.Vector({
 						if (varlayersource.getState() === 'ready') {
 							// carte chargée
 							map.unByKey(listenerchangelayer);
-							//chargerlalog();
+							chargerlalog();
 							console.log('fin de charger la log', new Date());
 							//Filterprovinceonmap();
 							console.log('fin de filter on province', new Date());
