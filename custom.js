@@ -402,7 +402,7 @@ function chargerlasave(save) {
 	// until LOAD is not finished we show the preloader
 	console.log('debut de chargerlaSave', new Date());
 	setTimeout(function () {
-		yadcf.exResetAllFilters(oTable);
+		
 		if (save == dernieresave) {
 			$('#ModeAffichage option[value="Batailles"]').removeAttr('disabled');
 			$('#ModeAffichage option[value="Batailles2"]').removeAttr('disabled');
@@ -497,7 +497,7 @@ cartecomplete = new ol.layer.Vector({
 				layers = map.getLayers().getArray();
 				vector = getLayerwarg(layers, "wargaming");
 				varlayersource = vector.getSource();
-				
+				yadcf.exResetAllFilters(oTable);
 
 				var listenerchangelayer = varlayersource.once('change', function (e) {
 				console.log('debut detection changement de layer', new Date());
