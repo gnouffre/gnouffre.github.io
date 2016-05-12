@@ -497,7 +497,7 @@ cartecomplete = new ol.layer.Vector({
 				layers = map.getLayers().getArray();
 				vector = getLayerwarg(layers, "wargaming");
 				varlayersource = vector.getSource();
-				yadcf.exResetAllFilters(oTable);
+				//yadcf.exResetAllFilters(oTable);
 
 				var listenerchangelayer = varlayersource.once('change', function (e) {
 				console.log('debut detection changement de layer', new Date());
@@ -2655,7 +2655,7 @@ function showLogTab9(idlog) {
 				return node.textContent;
 			});
 		// table change detected : sync data clan and redraw map
-		oTable.on('search.dt', function () {
+/* 		oTable.on('search.dt', function () {
 			Filterprovinceonmap();
 			$(document).ready(function () {
 				yadcf.exResetAllFilters(clanTable);
@@ -2679,7 +2679,7 @@ function showLogTab9(idlog) {
 			$('select[id^= "yadcf-filter-"][class*="select2"]').each(function () {
 				$(this).select2("close");
 			});
-		});
+		}); */
 		// initialiize Filter for this table
 		// actually Filter range slider is bugged, stay with range value
 		// until YADCF was corrected (https://github.com/vedmack/yadcf/issues/308)
