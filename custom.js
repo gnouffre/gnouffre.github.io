@@ -402,8 +402,7 @@ function chargerlasave(save) {
 	// until LOAD is not finished we show the preloader
 	console.log('debut de chargerlaSave', new Date());
 	setTimeout(function () {
-		preloader.show();
-
+		yadcf.exResetAllFilters(oTable);
 		if (save == dernieresave) {
 			$('#ModeAffichage option[value="Batailles"]').removeAttr('disabled');
 			$('#ModeAffichage option[value="Batailles2"]').removeAttr('disabled');
@@ -432,7 +431,6 @@ function chargerlasave(save) {
 			};
  }
 		console.log('fin de chargerlasave', new Date());
-		preloader.hide();
 	}, 100);
  };
 	
